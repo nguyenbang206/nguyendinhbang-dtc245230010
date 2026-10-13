@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quản lý Sinh viên</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="login" class="login" hidden>
+  <form id="lf" class="card lcard">
+    <div class="logo">🎓</div><h1>Quản lý Sinh viên</h1><small>Đăng nhập để tiếp tục</small>
+    <label>Tài khoản</label><input name="username" autocomplete="username" required>
+    <label>Mật khẩu</label><input name="password" type="password" autocomplete="current-password" required>
+    <p id="err" class="err"></p>
+    <button class="btn primary w">Đăng nhập</button>
+    <div id="quick" hidden><small>Demo (mật khẩu demo123) - đăng nhập nhanh:</small>
+      <div class="row"><button type="button" class="btn sm" data-u="admin">Admin</button><button type="button" class="btn sm" data-u="gv01">Giáo viên</button><button type="button" class="btn sm" data-u="sv001">Sinh viên</button></div></div>
+  </form>
+</div>
+<div id="app" hidden>
+  <header>
+    <div class="brand"><span class="logo">🎓</span><div><h1>Quản lý Sinh viên</h1><small id="who"></small></div></div>
+    <div class="hr"><span id="mode" class="chip demo" hidden>Chế độ demo</span><span id="role" class="chip"></span><button id="out" class="btn sm">Đăng xuất</button></div>
+  </header>
+  <main>
+    <nav class="tabs" id="tabs"></nav>
+    <section id="dash"></section>
+    <section id="list" hidden>
+      <div class="bar"><input id="q" type="search" placeholder="Tìm kiếm..."><button id="add" class="btn primary">+ Thêm mới</button></div>
+      <div class="card scroll"><table><thead id="head"></thead><tbody id="body"></tbody></table><p id="empty" class="empty" hidden>Chưa có dữ liệu</p></div>
+    </section>
+  </main>
+</div>
+<dialog id="dlg"><form id="f"><h2 id="dt"></h2><div id="fields"></div>
+  <div class="actions"><button type="button" class="btn" id="cancel">Hủy</button><button class="btn primary">Lưu</button></div></form></dialog>
+<div id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
+

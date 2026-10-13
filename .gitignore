@@ -1,0 +1,27 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+app/node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Private keys and certificates
+*.key
+*.pem
+nginx/certs/*
+!nginx/certs/.gitkeep
+
+# System files
+.DS_Store
+Thumbs.db

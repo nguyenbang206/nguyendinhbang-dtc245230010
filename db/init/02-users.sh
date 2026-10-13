@@ -1,0 +1,10 @@
+#!/bin/bash
+# User app chi co CRUD; user exporter chi doc metrics (han che quyen DB)
+mysql -uroot -p"$MYSQL_ROOT_PASSWORD" <<EOF
+CREATE USER 'app'@'%' IDENTIFIED BY '${APP_DB_PASSWORD}';
+GRANT SELECT, INSERT, UPDATE, DELETE ON ${MYSQL_DATABASE}.* TO 'app'@'%';
+CREATE USER 'exporter'@'%' IDENTIFIED BY '${EXPORTER_DB_PASSWORD}' WITH MAX_USER_CONNECTIONS 3;
+GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'exporter'@'%';
+FLUSH PRIVILEGES;
+EOF
+
