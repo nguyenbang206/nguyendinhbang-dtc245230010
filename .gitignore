@@ -25,3 +25,9 @@ nginx/certs/*
 # System files
 .DS_Store
 Thumbs.db
+*.save
+*.save.*
+*.bak
+*.save
+*.save.*
+*.bak

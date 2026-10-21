@@ -28,9 +28,18 @@ CREATE TABLE users (
   student_id INT NULL,
   FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
 );
+CREATE TABLE subjects (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  code VARCHAR(20) UNIQUE NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  credits INT NOT NULL DEFAULT 3
+);
 ALTER TABLE classes ADD FOREIGN KEY (teacher_id) REFERENCES users(id) ON DELETE SET NULL;
 
 INSERT INTO classes (name) VALUES ('DHTI15A'), ('DHTI15B');
+INSERT INTO subjects (code, name, credits) VALUES
+ ('TKHT','Trien khai he thong',3), ('CSDL','Co so du lieu',4),
+ ('MMT','Mang may tinh',3), ('ATTT','An toan thong tin',2);
 INSERT INTO students (code, full_name, email, class_id) VALUES
  ('SV001','Tran Thi B','sv001@example.com',1), ('SV002','Pham Van D','sv002@example.com',1),
  ('SV003','Le Minh E','sv003@example.com',2), ('SV004','Hoang Anh F','sv004@example.com',2);

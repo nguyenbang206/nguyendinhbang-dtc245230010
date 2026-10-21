@@ -41,7 +41,7 @@ services:
     restart: unless-stopped
     environment:
       PMA_HOST: db
-    ports: ["127.0.0.1:8085:80"]
+    ports: ["8085:80"]
     depends_on: [db]
     networks: [web, backend]
     security_opt: ["no-new-privileges:true"]

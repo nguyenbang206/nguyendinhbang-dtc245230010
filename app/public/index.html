@@ -1,40 +1,99 @@
 <!doctype html>
-<html lang="vi">
+<html lang="vi" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Quản lý Sinh viên</title>
+<meta name="description" content="Hệ thống quản lý sinh viên - Quản lý lớp học, sinh viên, điểm số và tài khoản">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!-- Login -->
 <div id="login" class="login" hidden>
+  <div class="login-bg"></div>
   <form id="lf" class="card lcard">
-    <div class="logo">🎓</div><h1>Quản lý Sinh viên</h1><small>Đăng nhập để tiếp tục</small>
-    <label>Tài khoản</label><input name="username" autocomplete="username" required>
-    <label>Mật khẩu</label><input name="password" type="password" autocomplete="current-password" required>
+    <div class="logo-wrap"><span class="logo-icon">🎓</span></div>
+    <h1>Quản lý Sinh viên</h1>
+    <p class="login-sub">Đăng nhập để tiếp tục</p>
+    <div class="field">
+      <label for="inp-user">Tài khoản</label>
+      <div class="input-wrap"><svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><input id="inp-user" name="username" autocomplete="username" placeholder="Nhập tài khoản" required></div>
+    </div>
+    <div class="field">
+      <label for="inp-pw">Mật khẩu</label>
+      <div class="input-wrap"><svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><input id="inp-pw" name="password" type="password" autocomplete="current-password" placeholder="Nhập mật khẩu" required></div>
+    </div>
     <p id="err" class="err"></p>
-    <button class="btn primary w">Đăng nhập</button>
-    <div id="quick" hidden><small>Demo (mật khẩu demo123) - đăng nhập nhanh:</small>
-      <div class="row"><button type="button" class="btn sm" data-u="admin">Admin</button><button type="button" class="btn sm" data-u="gv01">Giáo viên</button><button type="button" class="btn sm" data-u="sv001">Sinh viên</button></div></div>
+    <button class="btn primary w" type="submit">Đăng nhập</button>
   </form>
 </div>
+
+<!-- App -->
 <div id="app" hidden>
-  <header>
-    <div class="brand"><span class="logo">🎓</span><div><h1>Quản lý Sinh viên</h1><small id="who"></small></div></div>
-    <div class="hr"><span id="mode" class="chip demo" hidden>Chế độ demo</span><span id="role" class="chip"></span><button id="out" class="btn sm">Đăng xuất</button></div>
-  </header>
-  <main>
-    <nav class="tabs" id="tabs"></nav>
-    <section id="dash"></section>
-    <section id="list" hidden>
-      <div class="bar"><input id="q" type="search" placeholder="Tìm kiếm..."><button id="add" class="btn primary">+ Thêm mới</button></div>
-      <div class="card scroll"><table><thead id="head"></thead><tbody id="body"></tbody></table><p id="empty" class="empty" hidden>Chưa có dữ liệu</p></div>
-    </section>
-  </main>
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <span class="sidebar-logo">🎓</span>
+      <div class="sidebar-title">
+        <h1>Student Mgmt</h1>
+        <small id="who"></small>
+      </div>
+    </div>
+    <nav id="tabs" class="sidebar-nav"></nav>
+    <div class="sidebar-footer">
+      <div class="theme-toggle" id="themeToggle" title="Chuyển chế độ sáng/tối">
+        <svg class="theme-icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="theme-icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span class="theme-label">Chế độ sáng</span>
+      </div>
+      <div class="user-info">
+        <span id="role" class="chip"></span>
+      </div>
+      <button id="out" class="btn logout-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Đăng xuất
+      </button>
+    </div>
+  </aside>
+
+  <!-- Overlay for mobile -->
+  <div id="overlay" class="overlay" hidden></div>
+
+  <!-- Main content -->
+  <div class="main-wrap">
+    <header>
+      <button id="menuBtn" class="menu-btn" title="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <h2 id="pageTitle" class="page-title">Tổng quan</h2>
+      <div class="hr"></div>
+    </header>
+    <main>
+      <section id="dash"></section>
+      <section id="list" hidden>
+        <div class="bar">
+          <div class="search-wrap">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input id="q" type="search" placeholder="Tìm kiếm...">
+          </div>
+          <button id="add" class="btn primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Thêm mới</button>
+        </div>
+        <div class="card scroll"><table><thead id="head"></thead><tbody id="body"></tbody></table><p id="empty" class="empty" hidden>Chưa có dữ liệu</p></div>
+      </section>
+    </main>
+  </div>
 </div>
+
+<!-- Dialog -->
 <dialog id="dlg"><form id="f"><h2 id="dt"></h2><div id="fields"></div>
   <div class="actions"><button type="button" class="btn" id="cancel">Hủy</button><button class="btn primary">Lưu</button></div></form></dialog>
+
+<!-- Toast -->
 <div id="toast"></div>
+
 <script src="app.js"></script>
 </body>
 </html>
